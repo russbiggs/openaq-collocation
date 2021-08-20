@@ -1,8 +1,9 @@
 ## OpenAQ Collocation Tool
 
-Dependencies managed with yarn. To build project:
+Dependencies managed with yarn. Requires node >= v12. To build project:
 
 ```sh
+nvm use
 yarn install
 yarn run build
 ```
