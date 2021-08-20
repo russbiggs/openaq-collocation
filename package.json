@@ -1,0 +1,28 @@
+{
+  "name": "collocation_tool",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf dist && mkdir dist",
+    "build-js": "webpack",
+    "build": "yarn run clean && yarn run build-js"
+  },
+  "dependencies": {
+    "@observablehq/plot": "^0.1.0",
+    "@turf/circle": "^6.5.0",
+    "@turf/distance": "^6.5.0",
+    "d3-scale": "^4.0.0",
+    "d3-scale-chromatic": "^3.0.0",
+    "mitt": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "babel-loader": "^8.2.2",
+    "node-sass": "^6.0.1",
+    "terser-webpack-plugin": "^5.1.4",
+    "webpack": "^5.50.0",
+    "webpack-cli": "^4.7.2"
+  }
+}

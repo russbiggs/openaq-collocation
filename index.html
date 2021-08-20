@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAQ Collocation</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.4.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.0/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Oxygen', sans-serif;
+        }
+
+        html body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            width: 100vw;
+            height: 50px;
+            background-color:#232e3b;
+            color: white;
+        }
+
+        .title {
+            margin: 0 0 0 10px;
+            padding: 0;
+        }
+
+        .main {
+            height: calc(100vh - 50px);
+            width: 100vw;
+            display: flex;
+        }
+
+        .search {
+            flex: 1;
+            height: 100%;
+            overflow-y: scroll;
+        }
+
+        #map {
+            height: 300px;
+            width: 100%;
+        }
+
+        .placeholder {
+            display: none;
+        }
+
+        .placeholder--visible {
+            width: 50%;
+            margin: 100px auto;
+            display: block;
+        }
+
+        .results {
+            height: 500px;
+            width: 100%;
+        }
+
+        .sensor-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sensor-list-info {
+            margin: 0 auto;
+            width: 50%;
+            text-align: center;
+        }
+
+        .sensor-item {
+            border-bottom: #333 1px solid;
+            cursor: pointer;
+            width: 100%;
+            background-color: white;
+        }
+
+        .sensor-item:hover {
+            background-color: #ccc;
+        }
+
+
+        .sensor-item--active:hover {
+            background-color: #1681eb;
+        }
+        
+
+        .sensor-item--active {
+            background-color: #198cff;
+            color:white;
+        }
+
+        .sensor-item__body {
+            
+            display: flex;
+            margin-right: 15px;
+        }
+
+        .parameter-selection {
+            width: 50%;
+            margin: 0 auto;
+        }
+
+
+        .chip {
+            height: 16px;
+            padding: 4px;
+            display: inline;
+            font-size: 10px;
+            background-color: #999;
+            color:white;
+            border-radius: 8px;
+        }
+
+        .sensor-title {
+            margin: 5px 0 5px 15px;
+            font-size: 18px;
+        }
+
+        .sensor-type {
+            font-size: 16px;
+        }
+
+        .sensor-data {
+            margin-left: auto;
+        }
+
+        .detail {
+            flex: 1;
+            height: 100%;
+            overflow-y: scroll;
+        }
+
+        .distance-table {
+            display: none;
+            margin: 0 auto;
+            width: 50%;
+            margin-bottom: 40px;
+        }
+
+        .distance-table--visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="title">OpenAQ Comparison Tool</h1>
+    </header>
+    <main class="main">
+        <section class="search">
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="results">
+                    <div class="sensor-list-info js-sensor-list-info">
+
+                    </div>
+                    <ul class="sensor-list js-sensor-list">
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="detail">
+            <div class="parameter-selection">
+                <label for="parameter-select">Choose data type:</label>
+                <select name="parameter-select" id="parameter-select" class="js-parameter-select">
+                    <option value="pm25">PM-2.5</option>
+                    <option value="o3">03</option>
+                    <option value="pm10">PM-10</option>
+                    <option value="pm1">PM1</option>
+                    <option value="um100">PM-10 Count</option>
+                    <option value="um010">PM-1 Count</option>
+                    <option value="um025">PM-2.5 Count</option>                
+                </select>
+
+            </div>
+
+            <div class="placeholder placeholder--visible js-placeholder">Choose a location(s) to view</div>
+            <div class="chart-container js-chart-container">
+
+            </div>
+            <div class="distance-table-container">
+                <table class="distance-table js-distance-table">
+                    <thead><th>From</th><th>To</th><th>Distance</th></thead>
+                    <tbody class="js-distance-table-body">
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <script src="dist/bundle.js"></script>
+</body>
+</html>
